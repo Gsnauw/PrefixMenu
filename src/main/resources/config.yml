@@ -1,0 +1,132 @@
+messages:
+  prefix: '&7[&b&lSnow&f&lVille&7]&8 » &f'
+  no-permission: '&cJe hebt geen permissie om dit command uit te voeren!'
+  player-command: 'Dit is een player-only command.'
+  command-error: '&cOngeldige argumenten. Gebruik: /prefix'
+  player-not-found: '&cDe opgegeven speler is niet online!'
+  reload: 'De plugin is gereload.'
+  help: 'Gebruik: &a/pma &f<&ahelp &f| &areload&f>.'
+  is-staff: '&cEnkel spelers kunnen hun prefix wijzigen.'
+
+prefixes:
+  default:
+    prefix: '&8Speler'
+    material: 'GRAY_DYE'
+    weight: 1
+    type: normal
+  streamer:
+    prefix: '&fStr&5ea&cmer'
+    material: 'SPYGLASS'
+    weight: 2
+    type: normal
+  earlybird:
+    prefix: '&aEarlyBird'
+    material: 'CLOCK'
+    weight: 2
+    type: normal
+
+  zilver:
+    prefix: '&7Zilver'
+    material: 'LIGHT_GRAY_DYE'
+    weight: 10
+    type: normal
+  gold:
+    prefix: '&6Gold'
+    material: 'YELLOW_DYE'
+    weight: 10
+    type: normal
+  diamond:
+    prefix: '&bDiamond'
+    material: 'LIGHT_BLUE_DYE'
+    weight: 10
+    type: normal
+  snow:
+    prefix: '&bSn&fow'
+    material: 'WHITE_DYE'
+    weight: 10
+    type: normal
+  custom:
+    prefix: '&dCustom'
+    material: 'PINK_DYE'
+    weight: 10
+    type: normal
+  custom+:
+    prefix: '&dCustom&5+'
+    material: 'PURPLE_DYE'
+    weight: 10
+    type: normal
+  special:
+    prefix: '&2Special'
+    material: 'GREEN_DYE'
+    weight: 10
+    type: normal
+  builder:
+    prefix: '&1Builder'
+    material: none
+    weight: 20
+    type: staff
+  helper:
+    prefix: '&eHelper'
+    material: none
+    weight: 21
+    type: staff
+  mod:
+    prefix: '&bMod'
+    material: none
+    weight: 22
+    type: staff
+  srmod:
+    prefix: '&eHelper'
+    material: none
+    weight: 23
+    type: staff
+  developer:
+    prefix: '&3Developer'
+    material: none
+    weight: 30
+    type: staff
+  rp-manager:
+    prefix: '&2RP-Manager'
+    material: none
+    weight: 83
+    type: staff
+  head-builder:
+    prefix: '&8Head-Builder'
+    material: none
+    weight: 84
+    type: staff
+  head-dev:
+    prefix: '&5Head-Developer'
+    material: none
+    weight: 85
+    type: staff
+  admin:
+    prefix: '&cAdmin'
+    material: none
+    weight: 90
+    type: staff
+  kd-admin:
+    prefix: '&6Kingdom-&cAdmin'
+    material: none
+    weight: 91
+    type: staff
+  s-admin:
+    prefix: '&eSysteem-&cAdmin'
+    material: none
+    weight: 92
+    type: staff
+  manager:
+    prefix: '&9Manager'
+    material: none
+    weight: 95
+    type: staff
+  co-owner:
+    prefix: '&cCo-Owner'
+    material: none
+    weight: 99
+    type: staff
+  owner:
+    prefix: '&4Owner'
+    material: none
+    weight: 100
+    type: staff

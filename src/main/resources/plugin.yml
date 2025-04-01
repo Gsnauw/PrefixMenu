@@ -1,0 +1,47 @@
+name: PrefixMenu
+version: '0.0.1'
+main: be.gsnauw.prefixMenu.PrefixMenu
+api-version: '1.21'
+prefix: PrefixMenu
+authors: [ Gilles ]
+description: Use custom prefixes with a menu.
+website: Gsnauw.be
+depend: [PlaceholderAPI]
+commands:
+  prefix:
+    description: The main command for PrefixMenu.
+    usage: /<command>
+    aliases:
+      - prefixmenu
+    default: op
+    permission: prefixmenu.use
+  prefixmenuadmin:
+    description: The admin command for PrefixMenu.
+    usage: /<command>
+    aliases:
+      - pma
+    default: op
+    permission: prefixmenu.use
+
+permissions:
+  prefixmenu.*:
+    description: Geeft alle plugin permissies in één keer.
+    default: op
+    children:
+      prefixmenu.use: true
+      prefixmenu.help: true
+      prefixmenu.reload: true
+
+  prefixmenu.reload:
+    description: Reload de volledige plugin.
+    children:
+      prefixmenu.help: true
+      prefixmenu.use: true
+
+  prefixmenu.help:
+    description: Het help command.
+    children:
+      prefixmenu.use: true
+
+  prefixmenu.use:
+    description: Gebruik het prefix command.
