@@ -6,20 +6,17 @@ import be.gsnauw.prefixMenu.managers.ConfigManager;
 import be.gsnauw.prefixMenu.utils.ChatUtil;
 import lombok.Getter;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.permissions.Permission;
-import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
 
 public final class PrefixMenu extends JavaPlugin {
-
     @Getter
     private ConfigManager mainConfig;
     @Getter
     private ConfigManager usersConfig;
+    @Getter
+    private ConfigManager customPrefixConfig;
     @Getter
     private ChatUtil chatUtil;
     @Getter
@@ -30,6 +27,7 @@ public final class PrefixMenu extends JavaPlugin {
         instance = this;
         mainConfig = new ConfigManager(this, "config.yml");
         usersConfig = new ConfigManager(this, "users.yml");
+        customPrefixConfig = new ConfigManager(this, "customprefixes.yml");
         chatUtil = new ChatUtil(this);
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {

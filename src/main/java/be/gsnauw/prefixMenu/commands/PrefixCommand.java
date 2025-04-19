@@ -39,7 +39,6 @@ public class PrefixCommand implements CommandExecutor{
             }
 
             gui.prefixGui(p).open(p);
-
         } else {
             p.sendMessage(chat.prefix(mainConfig.getString("messages.command-error")));
         }

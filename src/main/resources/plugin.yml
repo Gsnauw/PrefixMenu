@@ -20,6 +20,7 @@ commands:
     usage: /<command>
     aliases:
       - pma
+      - prefixadmin
     default: op
     permission: prefixmenu.use
 
@@ -30,10 +31,10 @@ permissions:
     children:
       prefixmenu.use: true
       prefixmenu.help: true
-      prefixmenu.reload: true
+      prefixmenu.admin: true
 
-  prefixmenu.reload:
-    description: Reload de volledige plugin.
+  prefixmenu.admin:
+    description: Admin permissions.
     children:
       prefixmenu.help: true
       prefixmenu.use: true

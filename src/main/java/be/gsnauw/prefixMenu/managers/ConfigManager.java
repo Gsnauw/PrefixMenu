@@ -54,17 +54,14 @@ public class ConfigManager {
     private void updateConfigDefaults() {
         InputStream defaultStream = plugin.getResource(fileName);
         if (defaultStream == null) return;
-
         YamlConfiguration defaultConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(defaultStream));
         boolean updated = false;
-
         for (String key : defaultConfig.getKeys(true)) {
             if (!config.contains(key)) {
                 config.set(key, defaultConfig.get(key));
                 updated = true;
             }
         }
-
         if (updated) {
             save();
         }

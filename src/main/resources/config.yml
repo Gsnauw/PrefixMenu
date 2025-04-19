@@ -7,12 +7,22 @@ messages:
   reload: 'De plugin is gereload.'
   help: 'Gebruik: &a/pma &f<&ahelp &f| &areload&f>.'
   is-staff: '&cEnkel spelers kunnen hun prefix wijzigen.'
+  player-not-prefix: '&cSpeler heeft geen custom prefix.'
+  removed: 'De custom prefix van &a<player> &fis verwijderd.'
+  custom-no-permission: '&cDeze speler heeft niet de rank Custom+ of hoger.'
+  player-has-prefix: '&cDeze speler heeft al een custom prefix.'
+  added: 'Prefix ''<prefix>&f'' is toegevoegd voor &a<player>&f.'
+  edited: 'De prefix van &a<player> &fis veranderd naar ''<prefix>&f''.'
+
 
 prefixes:
   default:
     prefix: '&8Speler'
     material: 'GRAY_DYE'
     weight: 1
+    type: normal
+  customprefix:
+    material: 'DRAGON_BREATH'
     type: normal
   streamer:
     prefix: '&fStr&5ea&cmer'

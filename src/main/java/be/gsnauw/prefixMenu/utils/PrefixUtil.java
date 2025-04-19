@@ -6,14 +6,15 @@ import lombok.Getter;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
-public class PrefixUtil {
+import java.util.UUID;
 
+public class PrefixUtil {
     @Getter
     private static final PrefixUtil instance = new PrefixUtil();
-
     ChatUtil chat = PrefixMenu.getInstance().getChatUtil();
     ConfigManager mainConfig = PrefixMenu.getInstance().getMainConfig();
     ConfigManager usersConfig = PrefixMenu.getInstance().getUsersConfig();
+    ConfigManager customPrefixes = PrefixMenu.getInstance().getCustomPrefixConfig();
 
     public void setPrefix(Player player, String prefixName) {
         if (!mainConfig.getConfig().contains("prefixes." + prefixName)) {
@@ -23,7 +24,6 @@ public class PrefixUtil {
         usersConfig.getConfig().set("users." + player.getUniqueId(), prefixName);
         usersConfig.save();
     }
-
 
     public void setPrefixStaff(Player p) {
         ConfigurationSection prefixesSection = mainConfig.getConfig().getConfigurationSection("prefixes");
@@ -57,14 +57,48 @@ public class PrefixUtil {
         return false;
     }
 
+    public boolean checkCustomPrefix(Player p) {
+        ConfigurationSection customPrefixUsers = customPrefixes.getConfig().getConfigurationSection("prefixes");
+        UUID uuid = p.getUniqueId();
+        if (customPrefixUsers == null) {
+            return false;
+        }
+        return customPrefixUsers.contains(uuid.toString());
+    }
+
+    public void setCustomPrefix(Player p, String prefixValue) {
+        UUID uuid = p.getUniqueId();
+        customPrefixes.set("prefixes." + uuid, prefixValue);
+        customPrefixes.save();
+    }
+
+    public void removeCustomPrefix(Player p) {
+        UUID uuid = p.getUniqueId();
+        customPrefixes.set("prefixes." + uuid, null);
+        customPrefixes.save();
+    }
+
+    public String getCustomPrefix(Player p) {
+        UUID uuid = p.getUniqueId();
+        if (!checkCustomPrefix(p)) return null;
+        return customPrefixes.getString("prefixes." + uuid);
+    }
+
     public String getPrefix(Player p) {
         String uuidPath = "users." + p.getUniqueId();
         String defaultPrefix = mainConfig.getString("prefixes.default.prefix");
+        String selectedPrefix;
         if (!usersConfig.getConfig().contains(uuidPath)) {
             //Player not found
+            if (checkStaff(p)) {
+                //Player is staff but not found
+                setPrefixStaff(p);
+                selectedPrefix = usersConfig.getString(uuidPath);
+                return mainConfig.getString("prefixes." + selectedPrefix + ".prefix");
+            }
             return defaultPrefix;
         }
-        String selectedPrefix = usersConfig.getString(uuidPath);
+        selectedPrefix = usersConfig.getString(uuidPath);
         if (checkStaff(p)) {
             setPrefixStaff(p);
             selectedPrefix = usersConfig.getString(uuidPath);
@@ -75,7 +109,15 @@ public class PrefixUtil {
             return defaultPrefix;
         }
         if (p.hasPermission("sv-prefix." + selectedPrefix)) {
-            return mainConfig.getString("prefixes." + selectedPrefix + ".prefix");
+            if (selectedPrefix.equalsIgnoreCase("customprefix")) {
+                if (checkCustomPrefix(p)) {
+                    return getCustomPrefix(p);
+                } else {
+                    setPrefix(p, "default");
+                }
+            } else {
+                return mainConfig.getString("prefixes." + selectedPrefix + ".prefix");
+            }
         }
         if (!p.hasPermission("sv-prefix." + selectedPrefix)) {
             setPrefix(p, "default");

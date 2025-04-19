@@ -6,7 +6,6 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class PapiExpension extends PlaceholderExpansion {
-
     PrefixUtil prefixUtil = PrefixUtil.getInstance();
 
     @Override

@@ -20,10 +20,10 @@ import java.util.Objects;
 public class GuiUtil {
     @Getter
     private static final GuiUtil instance = new GuiUtil();
-
     ChatUtil chat = PrefixMenu.getInstance().getChatUtil();
     ConfigManager mainConfig = PrefixMenu.getInstance().getMainConfig();
     ConfigManager usersConfig = PrefixMenu.getInstance().getUsersConfig();
+    ConfigManager customPrefixes = PrefixMenu.getInstance().getCustomPrefixConfig();
     PrefixUtil prefixUtil = PrefixUtil.getInstance();
 
     public Gui prefixGui(Player p) {
@@ -45,7 +45,16 @@ public class GuiUtil {
 
         int slot = 0;
         for (String name : Objects.requireNonNull(mainConfig.getConfig().getConfigurationSection("prefixes")).getKeys(false)) {
-            String prefix = mainConfig.getString("prefixes." + name + ".prefix");
+            String prefix;
+            if (name.equalsIgnoreCase("customprefix")) {
+                if (prefixUtil.checkCustomPrefix(p)) {
+                    prefix = customPrefixes.getString("prefixes." + p.getUniqueId());
+                } else {
+                    continue;
+                }
+            } else {
+                prefix = mainConfig.getString("prefixes." + name + ".prefix");
+            }
             String materialString = mainConfig.getString("prefixes." + name + ".material");
 
             if (p.hasPermission("sv-prefix." + name)) {
@@ -54,7 +63,6 @@ public class GuiUtil {
                 List<String> lore = List.of("Klik om te selecteren");
                 ItemStack itemStack;
                 GuiItem item;
-
                 if (name.equalsIgnoreCase(selectedPrefix)) {
                     lore = List.of("Actieve prefix");
                     itemStack = addItem(material, prefix, lore, true);
